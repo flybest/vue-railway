@@ -10,8 +10,8 @@
           </Alert>
         </div>
         <div id="forcastChart" class="chart-area">
-          <Spinner class='spin-background' v-if='loading | dataLoading'></Spinner>
-          <IEcharts class='chart' :option="line" :notMerge='true' :resizable='true' @ready="onReady" @click="onClick"></IEcharts>
+          <Spinner class='spin-background' v-if='loading | dataLoading' :line-size="5" :line-bg-color="'rgba(255, 255, 255, 0.5)'"></Spinner>
+          <IEcharts class='chart' :option="line" :not-merge='true' :resizable='true' @ready="onReady" @click="onClick"></IEcharts>
         </div>
         <div class="row mt10">
             <div class="col-md-3 col-sm-3 col-xs-6 text-center">

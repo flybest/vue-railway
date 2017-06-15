@@ -7,7 +7,7 @@
       <div class="alert-container">
       </div>
       <div class="station-list-container" id="station-list">
-          <Spinner class="spin-background" v-if="loading" :line-size="5"></Spinner>
+          <Spinner class="spin-background" v-if="loading" :line-size="5" :line-bg-color="'rgba(255, 255, 255, 0.5)'"></Spinner>
           <ul class="ul-blank">
             <li v-for="station in getStationList">
               <a class="station-label btn btn-outline" :class="{'red':station.statue == 3,'yellow-gold':station.statue == 2, 'blue':station.statue == 1,'active': station.id == getActiveStation}" :data-item="station.id" @click="setActiveStation(station.id)">

@@ -10,7 +10,7 @@
             </button>
             <div class="navbar-brand" href="#">{{title}}</div>
         </div>
-        <Navbar :isCollapsed='isCollapsed'></Navbar>
+        <Navbar :is-collapsed='isCollapsed'></Navbar>
     </div>
 </div>
 </template>
