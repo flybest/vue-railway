@@ -16,19 +16,19 @@
         <div class="row mt10">
             <div class="col-md-3 col-sm-3 col-xs-6 text-center">
                 <span class="label label-primary">最大风速</span>
-                <p class="chart-mark"><Tween :value="maxValue"></Tween> m/s</p>
+                <p class="chart-mark"><Tween :value='maxValue'></Tween> m/s</p>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 text-center">
                 <span class="label label-success">平均风速</span>
-                <p class="chart-mark"><Tween :value="aveValue"></Tween> m/s</p>
+                <p class="chart-mark"><Tween :value='aveValue'></Tween> m/s</p>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 text-center">
                 <span class="label label-limit">减速达标率</span>
-                <p class="chart-mark"><Tween :value="limitCount"></Tween> %</p>
+                <p class="chart-mark"><Tween :value='limitCount'></Tween> %</p>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 text-center">
                 <span class="label label-stop">停车达标率</span>
-                <p class="chart-mark"><Tween :value="stopCount"></Tween> %</p>
+                <p class="chart-mark"><Tween :value='stopCount'></Tween> %</p>
             </div>
         </div>
     </div>
@@ -94,9 +94,9 @@
                       limitCountTemp++;
               }
               this.maxValue=maxValueTemp
-              this.aveValue=(aveValueTemp/data.data.length).toFixed(2);
-              this.stopCount=(stopCountTemp*100/data.data.length).toFixed(2);
-              this.limitCount=(limitCountTemp*100/data.data.length).toFixed(2);
+              this.aveValue=aveValueTemp/data.data.length;
+              this.stopCount=stopCountTemp*100/data.data.length;
+              this.limitCount=limitCountTemp*100/data.data.length;
 
               var line=_.assign({},defaultOption,{
                 title:{
