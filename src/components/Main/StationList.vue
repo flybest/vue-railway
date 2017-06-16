@@ -25,13 +25,11 @@
 
 <script>
   import { mapGetters } from 'vuex'
-  import Spinner from 'vue-simple-spinner'
   require('plugins/jquery.slimscroll.min.js')
 
   export default {
     name: 'stationList',
     components: {
-      Spinner
     },
     props:{
       loading:{

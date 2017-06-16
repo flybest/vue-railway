@@ -43,12 +43,12 @@
 </template>
 
 <script>
-import Dropdown from 'vue-strap/src/dropdown'
+//import Dropdown from 'vue-strap/src/dropdown'
 
 export default {
   name: 'navbar',
   components: {
-    Dropdown
+    //Dropdown
   },
   props: {
     isCollapsed:{

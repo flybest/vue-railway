@@ -32,7 +32,6 @@
   import WindForecast from '../components/Main/WindForecast'
   import ModelForecast from '../components/Main/ModelForecast'
   import connection from 'assets/js/connection'
-  import Alert from 'vue-strap/src/alert'
 
   export default {
     name: 'main',
@@ -41,7 +40,6 @@
       RailwayMap,
       WindForecast,
       ModelForecast,
-      Alert
     },
     data () {
       return {

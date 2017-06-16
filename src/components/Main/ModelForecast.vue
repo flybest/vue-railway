@@ -21,15 +21,11 @@
   import IEcharts from 'vue-echarts-v3'
   import defaultOption from 'assets/js/chartDefaultOption'
   import connection from 'assets/js/connection'
-  import Alert from 'vue-strap/src/alert'
-  import Spinner from 'vue-simple-spinner'
 
   export default {
     name: 'modelForecast',
     components: {
       IEcharts,
-      Alert,
-      Spinner
     },
     props:{
       loading:{

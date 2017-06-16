@@ -3,6 +3,8 @@
 </template>
 
 <script>
+  import TWEEN from '@tweenjs/tween.js'
+
   export default {
     name:'Tween',
     props: {
