@@ -1,0 +1,35 @@
+.leaflet-carousel{
+    position: absolute;
+    z-index: 10005;
+    /*top: 10px;*/
+    left: 50px;
+}
+
+.leaflet-carousel .carousel-item{
+    box-shadow: 0 1px 2px rgba(0,0,0,0.65);
+}
+
+.leaflet-carousel .carousel-content{
+    padding:15px 15px;
+    /*width:440px;*/
+}
+
+.leaflet-control-container > .leaflet-bottom.leaflet-left{
+    width:100%;
+}
+
+.leaflet-control-container > .leaflet-bottom.leaflet-left > .leaflet-carousel-legend{
+    z-index: 10005;
+    bottom:-60px;
+    width:100%;
+    min-height:60px;
+    border-top:1px solid #ccc;
+    background-color: #fff;
+    padding:10px 20px;
+    transition: 0.5s bottom;
+    margin:0;
+}
+
+.leaflet-control-container > .leaflet-bottom.leaflet-left > .leaflet-carousel-legend.active{
+    bottom:0px;
+}

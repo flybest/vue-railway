@@ -8,8 +8,9 @@ import store from './store'
 import _ from 'lodash'
 import Tween from '@tweenjs/tween.js'
 import * as links from 'assets/js/url'
-
 //import jQuery from 'jquery'
+import './assets/styles/app.scss';
+
 
 //window.jQuery = jQuery   // 经过测试发现，需要将jquery注册到window中，变成全局对象，使用时调用window.jQuery
 window._=_

@@ -1,7 +1,13 @@
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-@import 'bootstrap-variable-overrides';
+$fa-font-path: "~font-awesome-sass/assets/fonts/font-awesome/";
+// @import 'bootstrap-variable-overrides';
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
-@import 'overrides';
+// @import 'overrides';
+@import '~font-awesome-sass/assets/stylesheets/_font-awesome.scss';
+@import 'leaflet';
+@import 'leafletPlayback';
+@import 'leafletMapCarousel';
+
 @import 'layout';
 @import 'components';
 @import 'map';
