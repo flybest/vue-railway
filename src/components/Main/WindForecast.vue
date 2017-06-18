@@ -46,7 +46,7 @@
     name: 'windForecast',
     components: {
       IEcharts,
-      Tween,
+      Tween
     },
     props:{
       loading:{
