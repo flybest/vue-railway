@@ -4,6 +4,7 @@ $fa-font-path: "~font-awesome-sass/assets/fonts/font-awesome/";
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 // @import 'overrides';
 @import '~font-awesome-sass/assets/stylesheets/_font-awesome.scss';
+@import 'jquery-ui.min.scss';
 @import 'leaflet';
 @import 'leafletPlayback';
 @import 'leafletMapCarousel';

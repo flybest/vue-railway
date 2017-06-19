@@ -2,13 +2,13 @@
  * Created by zhangzt on 2016/10/19.
  */
 (function (factory) {
-    var L;
+    // var L;
     if (typeof define === 'function' && define.amd) {
         // AMD
         define(['leaflet'], factory);
     } else if (typeof module === 'object' && typeof module.exports === "object") {
         // Node/CommonJS
-        L = require('leaflet');
+        // L = require('leaflet');
         module.exports = factory(L);
     } else {
         // Browser globals

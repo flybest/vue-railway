@@ -21,8 +21,8 @@
 
 <script>
   require('plugins/leaflet')
-  // require('plugins/leafletPlayBack')
-  // require('plugins/leafletMapCarousel')
+  require('plugins/leafletPlayback')
+  require('plugins/leafletMapCarousel')
   import leafletMap from 'assets/js/map'
   import connection from 'assets/js/connection'
 
