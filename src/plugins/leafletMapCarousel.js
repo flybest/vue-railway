@@ -67,8 +67,9 @@
             playbackcontrol.addTo(this._carouselContent);
 
             L.DomEvent.on(this._carouselItem, 'click',this._toggleMenuContent,this);
+
             L.DomEvent.on(playbackcontrol.getControlBtn(), 'click', function(){
-                map.fire('showlegend');
+              map.fire('showlegend');
             });
 
             return this._container;

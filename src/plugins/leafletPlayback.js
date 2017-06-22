@@ -247,7 +247,7 @@
         _html: //'         <p class="sectionlabel">叠加控制</p>'+
         '         <div class="btn-group sectionlabel" data-toggle="buttons">'+
         '             <label class="btn btn-default" id="datalabel">'+
-        '                 <input type="checkbox" autocomplete="off"> '+
+        //'                 <input type="checkbox" autocomplete="off"> '+
         '             </label>'+
         '         </div>'+
         //'         <p class="sectionlabel">播放控制</p>'+
@@ -325,6 +325,8 @@
             this._playback.setControl(this._control);
 
             this._control.find('#datalabel').click(function(){
+                $(this).toggleClass('active focus');
+
                 if(!playback.islayerVisiable()) {
                     playback.showLayer();
                 }else{
@@ -339,6 +341,11 @@
                 if(playback.islayerVisiable()){
                     self._controlPlayer();
                 }
+            });
+
+            this._control.find('#speed-btn').click(function(){
+              var downItem=self._control.find('[aria-labelledby='+this.id+']')
+              downItem.slideToggle();
             });
 
             var startTime = playback.getStartTime();

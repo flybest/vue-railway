@@ -136,8 +136,8 @@ class Map{
     }
 
     updateWindField(data){
-      // var mapCarousel=this.leaflet.mapCarousel(msg.data,'显示风场','<img src="static/img/WFLegend.png" style="margin: 0 autodisplay: block">')
-      // mapCarousel.addTo(this.map)
+      var mapCarousel=this.leaflet.mapCarousel(data,'显示风场','<img src="static/img/WFLegend.png" style="margin: 0 auto; display: block">')
+      mapCarousel.addTo(this.Map)
     }
 
 }

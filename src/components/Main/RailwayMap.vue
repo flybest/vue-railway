@@ -5,12 +5,16 @@
     </div>
     <div class="panel-body">
         <div class="alert-container">
-          <Alert type="danger" :value="errMessage!=''">
-            <i class="fa-lg fa fa-warning"></i> {{errMessage}}
-          </Alert>
-          <!-- <span class="stations"></span>
-          <span class="statue"></span>
-          <span class="windpic"></span> -->
+          <span class="stations">
+            <Alert type="danger" :value="errMessageLine!=''">
+              <i class="fa-lg fa fa-warning"></i> {{errMessageLine}}
+            </Alert>
+          </span>
+          <span class="windpic">
+            <Alert type="danger" :value="errMessagePic!=''">
+              <i class="fa-lg fa fa-warning"></i> {{errMessagePic}}
+            </Alert>
+          </span>
         </div>
         <div id="map" class="map">
           <Spinner class='spin-background' v-if='loading | dataLoading' :line-size="5" :line-bg-color="'rgba(255, 255, 255, 0.5)'"></Spinner>
@@ -39,7 +43,8 @@
     data () {
       return {
         dataLoading: false,
-        errMessage:'',
+        errMessageLine:'',
+        errMessagePic:''
       }
     },
     created(){
@@ -49,7 +54,7 @@
       this.llMap = new leafletMap('map')
       this.llMap.selectMarkerCB = this.setActiveStation
       this.setRailway()
-
+      this.setWindField()
       //console.log(this.$store.getters.getSelectedStation)
       //this.llMap.updateStation(this.$store.getters.getStations)
     },
@@ -57,10 +62,24 @@
       setRailway(){
         this.apiGet('static/data/simul_railway.json', '').then((res) => {
           this.llMap.updateRailway(res)
-          this.dataLoading=!this.dataLoading
+          this.dataLoading=false
         },(err)=>{
-            this.errMessage=this.handelError(err,'network') + ' 加载线路数据失败'
-            this.dataLoading=!this.dataLoading
+            this.errMessageLine=this.handelError(err,'network') + ' 加载线路数据失败'
+            this.dataLoading=false
+        })
+      },
+      setWindField(){
+        this.apiGet(links.GET_WINDPIC, '').then((res) => {
+          this.handelResponse(res, (data) => {
+            this.llMap.updateWindField(res.data)
+          }, (err) => {
+            this.errMessagePic=this.handelError(err, 'data') + " 加载风场图失败"
+            // this.loading=false
+          })
+          this.dataLoading=false
+        },(err)=>{
+            this.errMessagePic=this.handelError(err,'network') + ' 加载风场图失败'
+            this.dataLoading=false
         })
       },
       setActiveStation (id) {
