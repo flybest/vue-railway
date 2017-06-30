@@ -16,6 +16,7 @@
     "jquery": "^1.11.3",
     "lodash": "^4.17.4",
     "vue": "^2.1.10",
+    "vue-datasource": "^2.0.1",
     "vue-echarts-v3": "^1.0.4",
     "vue-nprogress": "^0.1.5",
     "vue-router": "^2.2.0",
