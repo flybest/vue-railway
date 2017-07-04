@@ -5,26 +5,26 @@
     </div>
     <div class="panel-body">
       <div class="table-container">
-        <ServerTable :source="source" :columns="columns" :translation="translation" :limits="limits" :show-filter="true">
-          <!-- <div slot="filterAction" class="table-group-actions">
+        <ServerTable ref="table" :source="source" :columns="columns" :translation="translation" :limits="limits" :show-filter="false">
+          <div slot="filterAction" class="table-group-actions">
               <form class="form-inline">
                 <div class="form-group">
                   <div class="btn-group" data-toggle="buttons">
-                    <label class="btn blue active">
-                      <input type="radio" name="task-type" id="task-type-all" autocomplete="off" value="1" checked> 全部日志
+                    <label class="btn blue" :class="{'active':this.taskType==1}">
+                      <input type="radio" name="task-type" id="task-type-all" autocomplete="off" value="1" v-model="taskType"> 全部日志
                     </label>
-                    <label class="btn blue">
-                      <input type="radio" name="task-type" id="task-type-failed" autocomplete="off" value="2"> 失败日志
+                    <label class="btn blue" :class="{'active':this.taskType==2}">
+                      <input type="radio" name="task-type" id="task-type-failed" autocomplete="off" value="2" v-model="taskType"> 失败日志
                     </label>
                   </div>
                 </div>
                 <div class="form-group">
                     <label for="task-name">任务名称</label>
-                    <input type="text" id="task-name" class="form-control">
+                    <input type="text" id="task-name" class="form-control" v-model="taskName">
                 </div>
-                <button type="button" class="btn green-sharp table-group-action-submit"><i class="fa fa-search"></i> 搜索</button>
+                <button type="button" class="btn green-sharp table-group-action-submit" @click="getTableData"><i class="fa fa-search"></i> 搜索</button>
               </form>
-          </div> -->
+          </div>
         </ServerTable>
       </div>
     </div>
@@ -73,7 +73,20 @@
               entries: '条记录'
           }
         },
-        limits:[10,15,20]
+        limits:[10,15,20],
+        taskType:1,
+        taskName:''
+      }
+    },
+    methods:{
+      getTableData(){
+        this.$refs.table.setParams({'taskType':this.taskType,'taskName':this.taskName})
+        this.$refs.table.setData()
+      }
+    },
+    watch:{
+      taskType(){
+        this.getTableData()
       }
     }
   }

@@ -159,7 +159,8 @@ export default {
         from: 0,
         per_page: 10,
         current_page: 1
-      }
+      },
+      params:{}
     }
   },
   computed: {
@@ -251,9 +252,15 @@ export default {
       this.setData()
       this.$emit('searching', this.search)
     },
+    setParams(params){
+      this.params=_.assign({},this.params,params)
+    },
     setData () {
       this.loading = true
-      this.apiGet(`${this.source}?per_page=${this.perpage}&page=${this.pagination.current_page}&search=${this.search}`,'').then((res)=>{
+      this.params['per_page']=this.perpage
+      this.params['page']=this.pagination.current_page
+      this.params['search']=this.search
+      this.apiPost(`${this.source}`,this.params).then((res)=>{
         this.loading = false
         this.tableData = res.data
         this.pagination = res.pagination
