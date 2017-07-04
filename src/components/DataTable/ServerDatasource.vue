@@ -280,9 +280,9 @@ export default {
       this.selected = null
       this.indexSelected = -1
     },
-    // search: _.debounce(function () {
-    //   this.setData()
-    // }, 500)
+    search: _.debounce(function () {
+      this.setData()
+    }, 500)
   },
   mixins:[connection]
 }
@@ -304,6 +304,12 @@ export default {
   }
   .datatable-filter{
     float:right;
+
+    label{
+      font-weight: normal;
+      white-space: nowrap;
+      text-align: left;
+    }
 
     input{
       margin-left: 0.5em;

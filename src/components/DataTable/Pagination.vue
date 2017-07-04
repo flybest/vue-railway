@@ -9,17 +9,17 @@ export default {
         <nav>
           <ul class="pagination">
             <li class={{ disabled: this.pages.current_page === 1 }}>
-              <a href="#" on-click={ (e) => this.firstPage(e) }><span aria-hidden="true">&laquo;&laquo;</span></a>
+              <a href="#" on-click={ (e) => this.firstPage(e) }><span aria-hidden="true">&laquo;</span></a>
             </li>
             <li class={{ disabled: this.pages.current_page === 1 }}>
-              <a href="#" on-click={ (e) => this.previous(e) }><span aria-hidden="true">&laquo;</span></a>
+              <a href="#" on-click={ (e) => this.previous(e) }><span aria-hidden="true">&lt;</span></a>
             </li>
             { this.paginationItems }
             <li class={{ disabled: this.pages.current_page === this.pages.last_page }}>
-              <a href="#" on-click={ (e) => this.next(e) }><span aria-hidden="true">&raquo;</span></a>
+              <a href="#" on-click={ (e) => this.next(e) }><span aria-hidden="true">&gt;</span></a>
             </li>
             <li class={{ disabled: this.pages.current_page === this.pages.last_page }}>
-              <a href="#" on-click={ (e) => this.lastPage(e, this.pages.last_page) }><span aria-hidden="true">&raquo;&raquo;</span></a>
+              <a href="#" on-click={ (e) => this.lastPage(e, this.pages.last_page) }><span aria-hidden="true">&raquo;</span></a>
             </li>
           </ul>
         </nav>

@@ -5,8 +5,8 @@
     </div>
     <div class="panel-body">
       <div class="table-container">
-        <ServerTable source="http://localhost/tielu-prototype/server/table_ajax_task_2.php" :columns="columns" :translation="translation" :limits="limits" :show-filter="false">
-          <div slot="filterAction" class="table-actions-wrapper">
+        <ServerTable :source="source" :columns="columns" :translation="translation" :limits="limits" :show-filter="true">
+          <!-- <div slot="filterAction" class="table-group-actions">
               <form class="form-inline">
                 <div class="form-group">
                   <div class="btn-group" data-toggle="buttons">
@@ -24,7 +24,7 @@
                 </div>
                 <button type="button" class="btn green-sharp table-group-action-submit"><i class="fa fa-search"></i> 搜索</button>
               </form>
-          </div>
+          </div> -->
         </ServerTable>
       </div>
     </div>
@@ -41,6 +41,7 @@
     },
     data (){
       return {
+        source:links.GET_MONITOR,
         columns: [{
           name:'任务名称',
           key:'taskName'
