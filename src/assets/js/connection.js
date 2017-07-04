@@ -51,6 +51,7 @@ const apiMethods = {
     //   return request
     // },
     apiGet (url, data) {
+      console.log(url,data)
       return new Promise((resolve, reject) => {
         axios.get(url, data).then((response) => {
           resolve(response.data)

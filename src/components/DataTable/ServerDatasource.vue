@@ -1,35 +1,35 @@
 <script>
-import axios from 'axios'
-import _ from 'lodash'
-import DatasourceUtils from '../utils/DatasourceUtils'
+// import _ from 'lodash'
+import DatasourceUtils from './utils/DatasourceUtils'
 import Pagination from './Pagination.vue'
-import MoonLoader from 'vue-spinner/src/MoonLoader.vue'
-import { EventBus } from '../utils/EventBus'
+import { EventBus } from './utils/EventBus'
+import connection from 'assets/js/connection'
+import Spinner from 'vue-simple-spinner'
+
 export default {
   name: 'ServerDatasource',
   components: {
-    Pagination, MoonLoader
+    Pagination,Spinner
   },
   render (h) {
     return (
       <div class="vue-server-datasource">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="form-inline">
-              <div class="form-group pull-left">
-                <label class="control-label pr2">{ this.translation.limit }</label>
-                <select on-change={ (e) => this.sync('perpage', parseInt(e.target.value)) } class="form-control" number>
-                  { this.limitOptions }
-                </select>
-              </div>
-              <div class="form-group pull-right">
-                <input class="form-control mr1" type="text" on-input={ (e) => this.sync('search', e.target.value) } placeholder={this.translation.placeholder_search} />
-              </div>
-              <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="datatable-length">
+              {this.tableLength}
             </div>
           </div>
-          <div class="panel-body">
-            <table class="table table-striped">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="datatable-filter">
+              {this.tableFilter}
+              {this.$slots.filterAction}
+            </div>
+          </div>
+        </div>
+        <div class="datatable-content">
+          <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
               <thead>
                 <tr>
                   { this.columnItems }
@@ -37,21 +37,22 @@ export default {
               </thead>
               <tbody>
                 { this.columnObjects }
-                <tr>
-                  <td class="text-center warning" colspan={ this.columns.length }>{ this.tableInfo }</td>
-                </tr>
               </tbody>
             </table>
-            { this.spinnerItem }
           </div>
-          <div class="panel-footer">
-            <div class="pull-left btn-group btn-group-actions">
-              { this.actionsObject }
+          { this.spinnerItem }
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="datatable-info">
+              {this.tableInfo}
             </div>
-            <div class="pull-right">
-              <pagination pages={ this.pagination }></pagination>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="datatable-pagination">
+              {this.tablePagination}
             </div>
-            <div class="clearfix"></div>
           </div>
         </div>
       </div>
@@ -114,6 +115,30 @@ export default {
       default () {
         return []
       }
+    },
+    showLength:{
+      type: Boolean,
+      default (){
+        return true
+      }
+    },
+    showFilter:{
+      type: Boolean,
+      default (){
+        return true
+      }
+    },
+    showInfo:{
+      type: Boolean,
+      default (){
+        return true
+      }
+    },
+    showPagination:{
+      type: Boolean,
+      default (){
+        return true
+      }
     }
   },
   created () {
@@ -141,7 +166,7 @@ export default {
     spinnerItem () {
       if (this.loading) {
         return <div class="vue-spinner-wrapper">
-          <moon-loader></moon-loader>
+          <Spinner class='spin-background' line-size={5} line-bg-color={'rgba(255, 255, 255, 0.5)'}></Spinner>
         </div>
       }
     },
@@ -183,7 +208,31 @@ export default {
         }
       })
     },
-    tableInfo: DatasourceUtils.tableInfo
+    tableInfoContent: DatasourceUtils.tableInfo,
+    tableLength(){
+      if(this.showLength){
+        return <label class="control-label">{ this.translation.limit }
+          <select on-change={ (e) => this.sync('perpage', parseInt(e.target.value)) } class="form-control ml" number >
+            { this.limitOptions }
+          </select>
+        </label>
+      }
+    },
+    tableFilter(){
+      if(this.showFilter){
+        return <input class="form-control" type="text" on-input={ (e) => this.sync('search', e.target.value) } placeholder={this.translation.placeholder_search} />
+      }
+    },
+    tableInfo(){
+      if(this.showInfo){
+        return this.tableInfoContent
+      }
+    },
+    tablePagination(){
+      if(this.showPagination){
+        return <pagination pages={ this.pagination }></pagination>
+      }
+    }
   },
   methods: {
     fetchFromObject: DatasourceUtils.fetchFromObject,
@@ -204,14 +253,12 @@ export default {
     },
     setData () {
       this.loading = true
-      axios.get(`${this.source}?per_page=${this.perpage}&page=${this.pagination.current_page}&search=${this.search}`)
-      .then((response) => {
+      this.apiGet(`${this.source}?per_page=${this.perpage}&page=${this.pagination.current_page}&search=${this.search}`,'').then((res)=>{
         this.loading = false
-        this.tableData = response.data.data
-        this.pagination = response.data.pagination
+        this.tableData = res.data
+        this.pagination = res.pagination
         this.perpage = this.pagination.per_page
-      })
-      .catch((error) => {
+      },(err)=>{
         this.loading = false
         console.warn(`[VueDatasource] ${error}`)
       })
@@ -233,50 +280,76 @@ export default {
       this.selected = null
       this.indexSelected = -1
     },
-    search: _.debounce(function () {
-      this.setData()
-    }, 500)
-  }
+    // search: _.debounce(function () {
+    //   this.setData()
+    // }, 500)
+  },
+  mixins:[connection]
 }
 </script>
+
 <style lang="scss" scoped>
 .vue-server-datasource {
-  .panel-body {
-    position: relative;
-    padding: 0;
-  }
-  table {
-    margin-bottom: 0;
-  }
-  .panel-footer {
-    .btn-group-actions {
-      margin: 10px 0;
+  .datatable-length{
+    label{
+      font-weight: normal;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    select{
+      width: 75px;
+      display: inline-block;
     }
   }
+  .datatable-filter{
+    float:right;
+
+    input{
+      margin-left: 0.5em;
+      display: inline-block;
+      width: auto;
+    }
+  }
+
+  .datatable-content{
+    margin:10px 0;
+
+    .table{
+      margin:0;
+
+      th,td{
+        padding-top:10px;
+        padding-bottom:10px;
+      }
+    }
+  }
+
+  .datatable-info{
+    padding-top: 8px;
+    white-space: nowrap;
+  }
+
+  .datatable-pagination{
+    margin: 0;
+    white-space: nowrap;
+    text-align: right;
+    float: right;
+    padding-top: 0.25em;
+  }
+
   .vue-spinner-wrapper {
     position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(229, 229, 229, 0.5);
-    
-    .v-spinner {
-      position: absolute; 
-      top: 50%;
-      left: 50%;
-      margin-left: -25px;
-      margin-top: -50px;
-    }
   }
 }
 
 .pr1 {
   padding-right: 5px;
 }
-.pr2 {
-  padding-right: 10px;
-}
-.mr1 {
-  margin-right: 5px;
+.ml {
+  margin-left: 10px;
 }
 </style>

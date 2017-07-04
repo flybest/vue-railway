@@ -30,7 +30,7 @@ export default new Router({
         },
         {
           path: 'monitor',
-          name: 'monitor',
+          name: 'Monitor',
           component: Monitor
         }
       ]
