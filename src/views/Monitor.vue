@@ -19,7 +19,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                    <label for="task-name">任务名称</label>
+                    <label for="task-name">任务名称：</label>
                     <input type="text" id="task-name" class="form-control" v-model="taskName">
                 </div>
                 <button type="button" class="btn green-sharp table-group-action-submit" @click="getTableData"><i class="fa fa-search"></i> 搜索</button>

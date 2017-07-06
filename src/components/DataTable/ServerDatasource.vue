@@ -15,12 +15,12 @@ export default {
     return (
       <div class="vue-server-datasource">
         <div class="row">
-          <div class="col-md-3 col-sm-3 col-xs-12">
+          <div class="col-md-3 col-sm-2 col-xs-12">
             <div class="datatable-length">
               {this.tableLength}
             </div>
           </div>
-          <div class="col-md-9 col-sm-9 col-xs-12">
+          <div class="col-md-9 col-sm-10 col-xs-12">
             <div class="datatable-filter">
               {this.tableFilter}
               {this.$slots.filterAction}
@@ -158,7 +158,8 @@ export default {
         to: 0,
         from: 0,
         per_page: 10,
-        current_page: 1
+        current_page: 1,
+        last_page:1
       },
       params:{}
     }
@@ -213,7 +214,7 @@ export default {
     tableLength(){
       if(this.showLength){
         return <label class="control-label">{ this.translation.limit }
-          <select on-change={ (e) => this.sync('perpage', parseInt(e.target.value)) } class="form-control ml" number >
+          <select on-change={ (e) => this.sync('perpage', parseInt(e.target.value)) } class="form-control" number >
             { this.limitOptions }
           </select>
         </label>
@@ -323,7 +324,6 @@ export default {
     }
 
     input{
-      margin-left: 0.5em;
       display: inline-block;
       width: auto;
     }
@@ -367,6 +367,12 @@ export default {
       float: none;
       padding-top: 0.75em;
     }
+
+    .datatable-filter{
+      input.full-line{
+        width:100%;
+      }
+    }
   }
 
   .vue-spinner-wrapper {
@@ -380,8 +386,5 @@ export default {
 
 .pr1 {
   padding-right: 5px;
-}
-.ml {
-  margin-left: 10px;
 }
 </style>

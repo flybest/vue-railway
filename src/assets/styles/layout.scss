@@ -256,7 +256,7 @@ body{
     display: inline-block;
 }
 
-// @media (min-width: 768px) {
+@media (min-width: 768px) {
     .page-container .table-container .table-group-actions .form-inline > .form-group {
         margin: auto 20px;
     }
@@ -269,7 +269,7 @@ body{
         margin-right: 0;
         margin-left: 0;
     }
-// }
+}
 
 .table-container .dataTables_wrapper .dataTables_filter input{
     margin-left: 0;
