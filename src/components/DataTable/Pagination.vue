@@ -55,7 +55,8 @@ export default {
     },
     change (e, page) {
       e.preventDefault()
-      EventBus.$emit('pagination-change', page)
+      if(page != this.pages.current_page)
+        EventBus.$emit('pagination-change', page)
     },
     next (e) {
       e.preventDefault()
