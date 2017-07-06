@@ -249,18 +249,27 @@ body{
 }
 
 .page-container .table-container{
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
-@media (min-width: 768px) {
+.page-container .table-container .table-group-actions .form-inline > .form-group {
+    display: inline-block;
+}
+
+// @media (min-width: 768px) {
     .page-container .table-container .table-group-actions .form-inline > .form-group {
         margin: auto 20px;
     }
 
+    .page-container .table-container .table-group-actions .form-inline > .form-group:first-of-type {
+        margin-left: 0;
+    }
+
     .page-container .table-container .table-group-actions .form-inline > .form-group:last-of-type {
         margin-right: 0;
+        margin-left: 0;
     }
-}
+// }
 
 .table-container .dataTables_wrapper .dataTables_filter input{
     margin-left: 0;

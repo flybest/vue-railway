@@ -15,12 +15,12 @@ export default {
     return (
       <div class="vue-server-datasource">
         <div class="row">
-          <div class="col-md-3 col-sm-12 col-xs-12">
+          <div class="col-md-3 col-sm-3 col-xs-12">
             <div class="datatable-length">
               {this.tableLength}
             </div>
           </div>
-          <div class="col-md-9 col-sm-12 col-xs-12">
+          <div class="col-md-9 col-sm-9 col-xs-12">
             <div class="datatable-filter">
               {this.tableFilter}
               {this.$slots.filterAction}
@@ -44,12 +44,12 @@ export default {
         </div>
 
         <div class="row">
-          <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="datatable-info">
               {this.tableInfo}
             </div>
           </div>
-          <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="datatable-pagination">
               {this.tablePagination}
             </div>
@@ -262,12 +262,16 @@ export default {
       this.params['search']=this.search
       this.apiPost(`${this.source}`,this.params).then((res)=>{
         this.loading = false
-        this.tableData = res.data
-        this.pagination = res.pagination
-        this.perpage = this.pagination.per_page
+        try{
+          this.tableData = res.data
+          this.pagination = res.pagination
+          this.perpage = this.pagination.per_page
+        }catch(e){
+          console.warn(`[VueDatasource] ${e}`)
+        }
       },(err)=>{
         this.loading = false
-        console.warn(`[VueDatasource] ${error}`)
+        console.warn(`[VueDatasource] ${err}`)
       })
     }
   },
@@ -351,6 +355,20 @@ export default {
     padding-top: 0.25em;
   }
 
+
+  @media (max-width: 767px){
+    .datatable-info, .datatable-length{
+      text-align: center;
+      padding-top: 0;
+    }
+
+    .datatable-pagination, .datatable-filter{
+      text-align: center;
+      float: none;
+      padding-top: 0.75em;
+    }
+  }
+
   .vue-spinner-wrapper {
     position: absolute;
     top: 0;
@@ -358,6 +376,7 @@ export default {
     height: 100%;
   }
 }
+
 
 .pr1 {
   padding-right: 5px;
