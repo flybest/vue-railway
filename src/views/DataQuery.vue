@@ -12,22 +12,22 @@
                   <form class="form-inline">
                     <div class="form-group">
                       <div class="btn-group" data-toggle="buttons">
-                        <label class="btn blue active">
-                          <input type="radio" name="forcast-type" id="option1" autocomplete="off" value="1" checked> 模式预报
+                        <label class="btn blue" :class="{'active':this.fcstType==1}">
+                          <input type="radio" name="forcast-type" id="option1" autocomplete="off" value="1" v-model="fcstType"> 模式预报
                         </label>
-                        <label class="btn blue">
-                          <input type="radio" name="forcast-type" id="option2" autocomplete="off" value="2"> 阵风预报
+                        <label class="btn blue" :class="{'active':this.fcstType==2}">
+                          <input type="radio" name="forcast-type" id="option2" autocomplete="off" value="2" v-model="fcstType"> 阵风预报
                         </label>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="forcast-time">起报时间：</label>
                       <div class="input-group">
-                        <input type="text" id="forcast-time" class="form-control full-line" readonly>
+                        <input type="text" id="forcast-time" class="form-control full-line" readonly v-model="fcstTime">
                         <span class="input-group-addon date-reset"><i class="glyphicon glyphicon-remove"></i></span>
                       </div>
                     </div>
-                    <button type="button" class="btn green-sharp table-group-action-submit"><i class="fa fa-search"></i> 搜索</button>
+                    <button type="button" class="btn green-sharp table-group-action-submit" @click="getTableData('ftable')"><i class="fa fa-search"></i> 搜索</button>
                   </form>
                 </div>
               </ServerTable>
@@ -41,18 +41,18 @@
                     <div class="form-group">
                       <label for="start-time">开始时间：</label>
                       <div class="input-group">
-                        <input type="text" id="start-time" class="form-control full-line" readonly>
+                        <input type="text" id="start-time" class="form-control full-line" readonly v-model="startTime">
                         <span class="input-group-addon date-reset"><i class="glyphicon glyphicon-remove"></i></span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="end-time">结束时间：</label>
                       <div class="input-group">
-                        <input type="text" id="end-time" class="form-control full-line" readonly>
+                        <input type="text" id="end-time" class="form-control full-line" readonly v-model="endTime">
                         <span class="input-group-addon date-reset"><i class="glyphicon glyphicon-remove"></i></span>
                       </div>
                     </div>
-                    <button type="button" class="btn green-sharp table-group-action-submit"><i class="fa fa-search"></i> 搜索</button>
+                    <button type="button" class="btn green-sharp table-group-action-submit" @click="getTableData('ltable')"><i class="fa fa-search"></i> 搜索</button>
                   </form>
                 </div>
               </ServerTable>
@@ -122,18 +122,27 @@
               entries: '条记录'
           }
         },
-        limits:[10,15,20]
+        limits:[10,15,20],
+        fcstType:1,
+        fcstTime:'',
+        startTime:'',
+        endTime:''
       }
     },
     methods:{
-      getTableData(){
-        this.$refs.table.setParams({'taskType':this.taskType,'taskName':this.taskName})
-        this.$refs.table.setData()
-      }
-    },
-    watch:{
-      taskType(){
-        this.getTableData()
+      getTableData(table){
+        var target = this.$refs[table]
+        var params = {}
+        switch (table){
+          case 'ftable':
+          params = {'fcstType':this.fcstType,'fcstTime':this.fcstTime}
+          break;
+          case 'ltable':
+          params = {'startTime':this.startTime,'endTime':this.endTime}
+          break;
+        }
+        target.setParams(params)
+        target.setData()
       }
     }
   }
