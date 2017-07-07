@@ -102,9 +102,7 @@
        * @param newValue
        */
       value (newValue) {
-        console.log('value newValue:',newValue)
         this.dp && this.dp.date(newValue)
-        console.log('this.dp:',this.dp)
       },
       /**
        * Watch for any change in options and set them
@@ -122,12 +120,8 @@
        * @param event
        */
       onChange (event) {
-        console.log('%c------------','color:#ff0000')
-        // this.$emit('input', (event.date===false)?'':event.date);
         //this.$emit('input', event.date);
         this.$emit('input', this.$el.value);
-        console.log('event', event)
-        console.log('event.data', event.date)
       }
     }
   };

@@ -42,15 +42,17 @@
                     <div class="form-group">
                       <label for="start-time">开始时间：</label>
                       <div class="input-group">
-                        <input type="text" id="start-time" class="form-control full-line" readonly v-model="startTime">
-                        <span class="input-group-addon date-reset"><i class="glyphicon glyphicon-remove"></i></span>
+                        <!-- <input type="text" id="start-time" class="form-control full-line" readonly v-model="startTime"> -->
+                        <DatePicker v-model="startTime" :class="'full-line'" :config="pickerOption" :readOnly="true" ></DatePicker>
+                        <span class="input-group-addon date-reset" @click="clearTime('startTime')"><i class="glyphicon glyphicon-remove"></i></span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="end-time">结束时间：</label>
                       <div class="input-group">
-                        <input type="text" id="end-time" class="form-control full-line" readonly v-model="endTime">
-                        <span class="input-group-addon date-reset"><i class="glyphicon glyphicon-remove"></i></span>
+                        <!-- <input type="text" id="end-time" class="form-control full-line" readonly v-model="endTime"> -->
+                        <DatePicker v-model="endTime" :class="'full-line'" :config="pickerOption" :readOnly="true" ></DatePicker>
+                        <span class="input-group-addon date-reset" @click="clearTime('endTime')"><i class="glyphicon glyphicon-remove"></i></span>
                       </div>
                     </div>
                     <button type="button" class="btn green-sharp table-group-action-submit" @click="getTableData('ltable')"><i class="fa fa-search"></i> 搜索</button>
@@ -154,8 +156,6 @@
         target.setData()
       },
       clearTime(obj){
-        console.log("obj:",obj)
-        console.log("this[obj]",this[obj])
         this[obj]=null
       }
     }
