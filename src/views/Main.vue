@@ -31,7 +31,7 @@
   import RailwayMap from '../components/Main/RailwayMap'
   import WindForecast from '../components/Main/WindForecast'
   import ModelForecast from '../components/Main/ModelForecast'
-  import connection from 'assets/js/connection'
+  import connection from '../assets/js/connection'
 
   export default {
     name: 'main',

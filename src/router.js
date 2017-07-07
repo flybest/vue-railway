@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Full from 'containers/Full'
-import Main from 'views/Main'
-import DataQuery from 'views/DataQuery'
-import Monitor from 'views/Monitor'
+import Full from './containers/Full'
+import Main from './views/Main'
+import DataQuery from './views/DataQuery'
+import Monitor from './views/Monitor'
 
 Vue.use(Router)
 

@@ -23,8 +23,9 @@
                     <div class="form-group">
                       <label for="forcast-time">起报时间：</label>
                       <div class="input-group">
-                        <input type="text" id="forcast-time" class="form-control full-line" readonly v-model="fcstTime">
-                        <span class="input-group-addon date-reset"><i class="glyphicon glyphicon-remove"></i></span>
+                        <!-- <input type="text" id="forcast-time" class="form-control full-line" readonly v-model="fcstTime"> -->
+                        <DatePicker v-model="fcstTime" :class="'full-line'" :config="pickerOption" :readOnly="true" ></DatePicker>
+                        <span class="input-group-addon date-reset" @click="clearTime('fcstTime')"><i class="glyphicon glyphicon-remove"></i></span>
                       </div>
                     </div>
                     <button type="button" class="btn green-sharp table-group-action-submit" @click="getTableData('ftable')"><i class="fa fa-search"></i> 搜索</button>
@@ -65,11 +66,14 @@
 
 <script>
   import ServerTable from '../components/DataTable/ServerDatasource'
+  import DatePicker from '../components/DateTimePicker'
+  import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
 
   export default {
     name: 'dataQuery',
     components:{
-      ServerTable
+      ServerTable,
+      DatePicker
     },
     data (){
       return {
@@ -126,7 +130,12 @@
         fcstType:1,
         fcstTime:'',
         startTime:'',
-        endTime:''
+        endTime:'',
+        pickerOption:{
+          ignoreReadonly:true,
+          locale:'zh-cn',
+          format:'YYYY-MM-DD HH:mm'
+        }
       }
     },
     methods:{
@@ -143,12 +152,23 @@
         }
         target.setParams(params)
         target.setData()
+      },
+      clearTime(obj){
+        console.log("obj:",obj)
+        console.log("this[obj]",this[obj])
+        this[obj]=null
       }
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+/*这个样式本来是不需要的，但是vue-strap的datepicker组件没有设置css的scoped，导致样式冲突，只能加上了*/
+.table-container .datepicker {
+  position: static;
+  display: block;
+}
+
 
 </style>
