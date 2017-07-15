@@ -1,8 +1,8 @@
 {
-  "name": "my-vue-project",
+  "name": "vue-railway",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "Peter",
+  "author": "Peter Zhang",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
